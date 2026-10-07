@@ -50,14 +50,27 @@ h2{font-size:clamp(1.7rem,5vw,2.3rem);font-weight:800;margin-bottom:.5rem}
 .road div{background:var(--surf);border-left:3px solid var(--acc);padding:.9rem 1rem;border-radius:0 .5rem .5rem 0}
 .road b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.05rem}
 .road span{color:var(--mut);font-size:.95rem}
-/* guia platformer */
-.steps{list-style:none;margin:0;padding:0;counter-reset:s}
-.steps li{counter-increment:s;position:relative;padding:0 0 1.5rem 3rem}
-.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:2rem;height:2rem;border-radius:50%;background:var(--acc);color:#000;font:800 1rem/2rem "Bricolage Grotesque",sans-serif;text-align:center}
-.steps h3{font-size:1.15rem;margin-bottom:.2rem}
-.steps p{margin:0;color:var(--mut);max-width:34rem}
-.tip{background:var(--surf);border-left:3px solid var(--acc2);padding:1rem 1.25rem;border-radius:0 .5rem .5rem 0;margin-top:1rem}
-.tip p{margin:0}
+/* metas */
+.meta-top{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.count{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.1rem;color:var(--acc2)}
+.bar{flex:1 1 8rem;height:.5rem;background:var(--surf);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.goals{list-style:none;margin:0;padding:0}
+.goals li{position:relative;padding:1rem 0 1rem 2.75rem;border-top:1px solid var(--line)}
+.goals li:last-child{border-bottom:1px solid var(--line)}
+.goals li::before{content:"";position:absolute;left:0;top:1.05rem;width:1.6rem;height:1.6rem;border:2px solid var(--acc);border-radius:.4rem}
+.goals li.feito::before{content:"\2713";background:var(--acc);color:#000;font:800 1.1rem/1.45rem "Instrument Sans",sans-serif;text-align:center}
+.goals b{display:block;font-size:1.1rem;font-weight:600}
+.edit-bar{display:none;margin:0 0 1.5rem;padding:1rem 1.25rem;background:var(--surf);border-left:3px solid var(--acc2);border-radius:0 .5rem .5rem 0}
+.edit-bar p{margin:0 0 .75rem;color:var(--mut)}
+.edit-bar button{font:600 1rem "Instrument Sans",sans-serif;background:var(--acc);color:#000;border:0;border-radius:.4rem;padding:.55rem 1rem;cursor:pointer;margin-right:.5rem}
+.edit-bar button.sec{background:transparent;color:var(--acc2);border:1px solid var(--line)}
+.edit-bar button:focus-visible,.goals li:focus-visible{outline:3px solid var(--acc2);outline-offset:3px}
+.editando .edit-bar{display:block}
+.editando .goals li{cursor:pointer}
+.editando .goals li:hover::before{background:#a855f740}
+.editando .goals li.feito:hover::before{background:var(--acc)}
+.goals li.feito b{color:var(--mut);text-decoration:line-through;text-decoration-color:var(--acc)}
 footer{padding:3rem 0 4rem;color:var(--mut);border-top:1px solid var(--line);margin-top:2rem}
 footer h2{color:var(--tx)}
 @media (prefers-reduced-motion:reduce){.hero path{animation:none;stroke-dashoffset:0}html{scroll-behavior:auto}}
@@ -65,7 +78,7 @@ footer h2{color:var(--tx)}
 </head>
 <body>
 <div class="wrap">
-<nav aria-label="Principal"><a href="#trilhas">Trilhas</a><a href="#roadmap">Roadmap</a><a href="#criar">Criar um jogo</a><a href="#contato">Contato</a></nav>
+<nav aria-label="Principal"><a href="#trilhas">Trilhas</a><a href="#roadmap">Roadmap</a><a href="#metas">Metas</a><a href="#contato">Contato</a></nav>
 
 <header class="hero">
 <h1>Guilherme</h1>
@@ -84,7 +97,7 @@ footer h2{color:var(--tx)}
 <li class="next"><i class="node"></i><h3>Robótica</h3><p>Juntar sensores, motores e código para fazer algo se mover e reagir ao ambiente.</p><span class="st">Próximo</span></li>
 <li class="doing"><i class="node"></i><h3>Cultura hacker</h3><p>Curiosidade para abrir, entender e melhorar sistemas, com ética e aprendizado compartilhado.</p><span class="st">Em andamento</span></li>
 <li class="doing"><i class="node"></i><h3>Cultura maker</h3><p>Aprender fazendo: prototipar, errar rápido e documentar o que deu certo.</p><span class="st">Em andamento</span></li>
-<li class="next"><i class="node"></i><h3>Desenvolvimento de jogos</h3><p>Criar meu primeiro jogo de plataforma, com pulo, inimigos e uma fase completa. O guia mais abaixo é o meu mapa.</p><span class="st">Próximo</span></li>
+<li class="next"><i class="node"></i><h3>Desenvolvimento de jogos</h3><p>Criar meu primeiro jogo de plataforma 2D, com pulo, inimigos e uma fase completa.</p><span class="st">Próximo</span></li>
 </ol>
 </section>
 
@@ -96,22 +109,27 @@ footer h2{color:var(--tx)}
 <div><b>Mês 2</b><span>Eletrônica e primeiros projetos maker</span></div>
 <div><b>Mês 3</b><span>Robótica</span></div>
 <div><b>Mês 4</b><span>Cultura hacker</span></div>
-<div><b>Mês 5</b><span>Meu primeiro jogo de plataforma</span></div>
+<div><b>Mês 5</b><span>Meu primeiro jogo de plataforma 2D</span></div>
 </div>
 </section>
 
-<section id="criar">
-<h2>Como criar um jogo de plataforma</h2>
-<p class="sub">Meu roteiro para o mês 5, para quem também quer começar sem experiência.</p>
-<ol class="steps">
-<li><h3>Ideia e conceito</h3><p>Escolha o tema (espaço, floresta, castelo), quem é o personagem e qual é o objetivo: chegar ao fim da fase, pegar itens ou fugir de algo.</p></li>
-<li><h3>Escolha a ferramenta</h3><p>Para começar sem complicação: Scratch, que ensina a lógica com blocos. Para crescer depois: Godot (gratuito) ou HTML e JavaScript.</p></li>
-<li><h3>Personagem e movimento</h3><p>Todo platformer precisa de andar para os lados, pular e uma gravidade que puxa o personagem de volta ao chão.</p></li>
-<li><h3>Cenário e plataformas</h3><p>Monte blocos onde o personagem pode pisar. Comece com poucas plataformas e aumente a dificuldade aos poucos.</p></li>
-<li><h3>Desafios</h3><p>Adicione inimigos, buracos ou obstáculos. Eles precisam ser justos: o jogador tem que entender por que perdeu.</p></li>
-<li><h3>Testar e ajustar</h3><p>Jogue várias vezes. Ajuste a força do pulo, a velocidade e a posição dos inimigos até ficar divertido.</p></li>
-</ol>
-<div class="tip"><p>Dica: comece copiando um jogo simples que você já viu, mude os desenhos e as fases, e só depois crie algo 100% original.</p></div>
+<section id="metas">
+<h2>O que quero conquistar</h2>
+<p class="sub">Minha lista de metas. Cada vez que eu conseguir uma, ela ganha o visto.</p>
+<div class="edit-bar" id="editbar">
+<p>Modo edição: clique em uma meta para marcar ou desmarcar. Fica salvo neste navegador. Para os visitantes verem, copie o código e cole no index.html no lugar da lista.</p>
+<button id="copiar" type="button">Copiar código da lista</button><button id="limpar" type="button" class="sec">Desmarcar tudo</button>
+<span id="aviso" role="status" aria-live="polite"></span>
+</div>
+<div class="meta-top"><span class="count" id="count"></span><div class="bar" aria-hidden="true"><i id="fill"></i></div></div>
+<!-- Para marcar uma meta como concluída, troque <li> por <li class="feito">. Para adicionar uma meta, copie um <li> inteiro. -->
+<ul class="goals" id="goals">
+<li><b>Virar professor de boxe</b></li>
+<li><b>Aprender a desenvolver jogos</b></li>
+<li><b>Aprender a tocar violão perfeitamente</b></li>
+<li><b>Aprender a tocar guitarra</b></li>
+<li><b>Aprender tudo sobre programação</b></li>
+</ul>
 </section>
 
 <footer id="contato">
@@ -120,5 +138,30 @@ footer h2{color:var(--tx)}
 <p>Feito em São Paulo com HTML e CSS.</p>
 </footer>
 </div>
+<script>
+(function(){
+var ul=document.getElementById("goals"),lis=[].slice.call(ul.children),KEY="metas-guilherme";
+var edit=/(^|[?&])editar(=|&|$)/.test(location.search),aviso=document.getElementById("aviso");
+function atualizar(){var f=lis.filter(function(l){return l.classList.contains("feito")}).length;
+document.getElementById("count").textContent=f+" de "+lis.length+" conquistadas";
+document.getElementById("fill").style.width=(lis.length?f/lis.length*100:0)+"%";
+lis.forEach(function(l){if(edit)l.setAttribute("aria-checked",l.classList.contains("feito"))})}
+function salvar(){try{localStorage.setItem(KEY,JSON.stringify(lis.map(function(l){return l.classList.contains("feito")})))}catch(e){}}
+if(edit){
+document.body.classList.add("editando");
+try{var sv=JSON.parse(localStorage.getItem(KEY)||"null");if(sv&&sv.length===lis.length)lis.forEach(function(l,i){l.classList.toggle("feito",!!sv[i])})}catch(e){}
+lis.forEach(function(l){l.setAttribute("role","checkbox");l.tabIndex=0;
+function t(){l.classList.toggle("feito");salvar();atualizar()}
+l.addEventListener("click",t);
+l.addEventListener("keydown",function(e){if(e.key===" "||e.key==="Enter"){e.preventDefault();t()}})});
+document.getElementById("limpar").onclick=function(){lis.forEach(function(l){l.classList.remove("feito")});salvar();atualizar()};
+document.getElementById("copiar").onclick=function(){
+var html='<ul class="goals" id="goals">\n'+lis.map(function(l){return '<li'+(l.classList.contains("feito")?' class="feito"':'')+'>'+l.innerHTML+'</li>'}).join("\n")+'\n</ul>';
+function ok(m){aviso.textContent=m}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(html).then(function(){ok("Código copiado.")},function(){ok("Não consegui copiar. Tente de novo.")})}else{ok("Seu navegador bloqueou a cópia.")}}
+}
+atualizar();
+})();
+</script>
 </body>
 </html>
